@@ -1,3 +1,4 @@
+import pickle
 import joblib
 import pandas as pd
 import streamlit as st
@@ -6,7 +7,8 @@ st.set_page_config(page_title="ABC Ltd. | Customer Decision Tool", layout="cente
 
 @st.cache_resource
 def load_models():
-    churn = joblib.load("churn_model.joblib")
+    with open("churn_model.sav", "rb") as file:
+    churn = pickle.load(file)
     charge = joblib.load("monthly_charge_model.joblib")
     return churn, charge
 
